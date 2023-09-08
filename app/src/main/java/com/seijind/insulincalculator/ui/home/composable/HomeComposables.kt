@@ -12,16 +12,23 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.seijind.insulincalculator.ui.home.model.HomeUiState
 import com.seijind.insulincalculator.ui.theme.InsulinCalculatorTheme
 import com.seijind.insulincalculator.ui.theme.spacing
 
 @Composable
-internal fun HomeScreen() {
-    HomeContent()
+internal fun HomeScreen(
+    uiState: HomeUiState?
+) {
+    uiState?.let { state ->
+        HomeContent(state = state)
+    }
 }
 
 @Composable
-private fun HomeContent() {
+private fun HomeContent(
+    state: HomeUiState
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -38,6 +45,8 @@ private fun HomeContent() {
 @Composable
 private fun HomeContentPreview() {
     InsulinCalculatorTheme {
-        HomeContent()
+        HomeContent(
+            state = HomeUiState()
+        )
     }
 }

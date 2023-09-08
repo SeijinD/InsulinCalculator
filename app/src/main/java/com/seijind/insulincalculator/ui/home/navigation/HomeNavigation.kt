@@ -18,6 +18,6 @@ fun NavGraphBuilder.homeScreen() {
             viewModel.init()
         }
 
-        HomeScreen()
+        HomeScreen(uiState = viewModel.uiState.value)
     }
 }
