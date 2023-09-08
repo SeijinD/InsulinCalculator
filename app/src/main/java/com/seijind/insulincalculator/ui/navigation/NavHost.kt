@@ -5,6 +5,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.seijind.insulincalculator.ui.InsulinCalculatorViewModel
+import com.seijind.insulincalculator.ui.home.navigation.homeScreen
 import com.seijind.insulincalculator.ui.splash.navigation.splashScreen
 import com.seijind.insulincalculator.ui.theme.InsulinCalculatorTheme
 
@@ -24,6 +25,7 @@ fun InsulinCalculatorNavHost(
             startDestination = Screen.Splash.route
         ) {
             splashScreen(goHome = { navController.navigate(Screen.Home.route) })
+            homeScreen()
         }
     }
 }
