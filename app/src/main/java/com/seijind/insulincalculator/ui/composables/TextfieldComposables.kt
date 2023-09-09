@@ -1,4 +1,4 @@
-package com.seijind.insulincalculator.ui
+package com.seijind.insulincalculator.ui.composables
 
 
 import androidx.compose.foundation.layout.fillMaxWidth

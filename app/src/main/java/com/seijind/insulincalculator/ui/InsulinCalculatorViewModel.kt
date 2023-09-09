@@ -14,5 +14,4 @@ class InsulinCalculatorViewModel @Inject constructor(
 
         }
     }
-
 }
