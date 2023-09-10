@@ -16,18 +16,25 @@ import com.seijind.insulincalculator.ui.home.model.HomeUiState
 import com.seijind.insulincalculator.ui.theme.InsulinCalculatorTheme
 import com.seijind.insulincalculator.ui.theme.spacing
 
+private typealias OnResultClicked = () -> Unit
+
 @Composable
 internal fun HomeScreen(
-    uiState: HomeUiState?
+    uiState: HomeUiState?,
+    onResultClicked: OnResultClicked
 ) {
     uiState?.let { state ->
-        HomeContent(state = state)
+        HomeContent(
+            state = state,
+            onResultClicked = { onResultClicked() }
+        )
     }
 }
 
 @Composable
 private fun HomeContent(
-    state: HomeUiState
+    state: HomeUiState,
+    onResultClicked: OnResultClicked
 ) {
     Column(
         modifier = Modifier
@@ -46,7 +53,8 @@ private fun HomeContent(
 private fun HomeContentPreview() {
     InsulinCalculatorTheme {
         HomeContent(
-            state = HomeUiState()
+            state = HomeUiState(),
+            onResultClicked = {}
         )
     }
 }

@@ -13,10 +13,12 @@ data class HomeUiState(
     val totalCarbs: MutableDoubleState = mutableDoubleStateOf(0.0),
     val gi: MutableIntState = mutableIntStateOf(0),
     val result: MutableState<String> = mutableStateOf("")
-)
+) {
+
+}
 
 data class Food(
-    val name: String = "",
-    val carbs: Double = 0.0,
+    val name: MutableState<String> = mutableStateOf(""),
+    val carbs: MutableDoubleState = mutableDoubleStateOf(0.0),
     val grams: MutableIntState = mutableIntStateOf(0)
 )
