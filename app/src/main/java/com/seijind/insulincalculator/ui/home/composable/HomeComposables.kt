@@ -156,7 +156,7 @@ private fun HomeContent(
                         fontWeight = FontWeight.Bold
                     )
                     Text(
-                        text = "${food.grams.value}gr",
+                        text = stringResource(id = R.string.grams, food.grams.value),
                         fontSize = 16.sp,
                         fontWeight = FontWeight.Bold
                     )
@@ -234,7 +234,7 @@ private fun HomeContent(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(MaterialTheme.spacing.medium),
-            text = "Result: ${state.result.value} units",
+            text = stringResource(id = R.string.result_text, state.result.value),
             fontSize = 16.sp,
             fontWeight = FontWeight.Bold
         )

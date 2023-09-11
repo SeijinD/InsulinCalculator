@@ -3,17 +3,19 @@
     <string name="app_name">Insulin Calculator</string>
 
     <!-- Placeholders -->
-    <string name="placeholder_food">Egg</string>
+    <string name="placeholder_food">Αυγό</string>
     <string name="placeholder_food_grams">50γρ</string>
 
     <!-- Labels -->
-    <string name="label_foods">Foods</string>
-    <string name="label_food_grams">Grams</string>
-    <string name="label_divider">Divider</string>
+    <string name="label_foods">Τρόφιμα</string>
+    <string name="label_food_grams">Γραμμάρια</string>
+    <string name="label_divider">Διαιρέτης</string>
     <string name="label_gi">GI</string>
 
     <!-- Buttons -->
-    <string name="button_add">Add</string>
-    <string name="button_result">Result</string>
+    <string name="button_add">Προσθήκη</string>
+    <string name="button_result">Αποτέλεσμα</string>
 
+    <string name="result_text">Αποτέλεσμα: %1$s Μονάδες</string>
+    <string name="grams">%1$s γρ</string>
 </resources>

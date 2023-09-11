@@ -17,4 +17,6 @@
     <string name="button_add">Add</string>
     <string name="button_result">Result</string>
 
+    <string name="result_text">Result: %1$s Units</string>
+    <string name="grams">%1$s gr</string>
 </resources>
