@@ -34,9 +34,9 @@ class HomeViewModel @Inject constructor(
                         grams = mutableStateOf("300")
                     )
                 ),
-                divider = mutableIntStateOf(10),
+                divider = mutableStateOf("10"),
                 totalCarbs = mutableDoubleStateOf(50.0),
-                gi = mutableIntStateOf(160),
+                gi = mutableStateOf("160"),
                 result = mutableStateOf("")
             )
         }
@@ -47,8 +47,8 @@ class HomeViewModel @Inject constructor(
             uiState.value?.totalCarbs?.doubleValue?.plus(food.carbs.doubleValue)
         }
         val totalCarbs = uiState.value?.totalCarbs?.doubleValue ?: 0.0
-        val gi = uiState.value?.gi?.intValue ?: 0
-        val divider = uiState.value?.divider?.intValue ?: 0
+        val gi = uiState.value?.gi?.value?.toInt() ?: 0
+        val divider = uiState.value?.divider?.value?.toInt() ?: 0
 
         val result: Double = when (gi) {
             in 0..70 -> customRound(totalCarbs / divider)

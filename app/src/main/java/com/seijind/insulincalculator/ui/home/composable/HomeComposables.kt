@@ -22,6 +22,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -64,10 +65,9 @@ private fun HomeContent(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.small)
     ) {
-        val view = LocalView.current
         val food by remember { mutableStateOf(Food()) }
-        var divider by remember { mutableIntStateOf(state.divider.intValue) }
-        var gi by remember { mutableIntStateOf(state.gi.intValue) }
+        var divider by remember { mutableStateOf(state.divider.value) }
+        var gi by remember { mutableStateOf(state.gi.value) }
 
         Text(text = "Home")
         Text(
@@ -84,8 +84,7 @@ private fun HomeContent(
             placeholder = R.string.placeholder_food_grams,
             keyboardType = KeyboardType.Number,
             onTextChanged = { food.grams.value  = it },
-            onClearClick = { food.grams.value = "" },
-            onDoneActionClick = { view.clearFocus() }
+            onClearClick = { food.grams.value = "" }
         )
         Column(
             modifier = Modifier
@@ -105,44 +104,48 @@ private fun HomeContent(
                 textAlign = TextAlign.Center
             )
         }
-//        CustomTextfield(
-//            modifier = Modifier.fillMaxWidth(),
-//            text = divider.toString(),
-//            label = R.string.label_divider,
-//            placeholder = R.string.placeholder_divider,
-//            onAddClicked = {
-//                divider = it.toInt()
-//                state.divider.intValue = divider
-//            },
-//            onClearClick = { divider = 0 }
-//        )
-//        CustomTextfield(
-//            modifier = Modifier.fillMaxWidth(),
-//            text = gi.toString(),
-//            label = R.string.label_gi,
-//            placeholder = R.string.placeholder_gi,
-//            onAddClicked = { state.gi.intValue = it.toInt() },
-//            onClearClick = { gi = 0 }
-//        )
-//        Column(
-//            modifier = Modifier
-//                .fillMaxWidth()
-//                .padding(horizontal = MaterialTheme.spacing.medium)
-//                .background(color = Color.Green, shape = RoundedCornerShape(MaterialTheme.spacing.small))
-//                .clip(RoundedCornerShape(MaterialTheme.spacing.small))
-//                .clickable { onResultClicked() },
-//        ) {
-//            Text(
-//                modifier = Modifier
-//                    .fillMaxWidth()
-//                    .padding(all = MaterialTheme.spacing.medium),
-//                text = stringResource(id = R.string.button_result),
-//                fontSize = 16.sp,
-//                fontWeight = FontWeight.Bold,
-//                color = Color.Black,
-//                textAlign =  TextAlign.Center
-//            )
-//        }
+        CustomOutlinedTextField(
+            modifier = Modifier.fillMaxWidth(),
+            text = divider,
+            label = R.string.label_divider,
+            placeholder = R.string.placeholder_divider,
+            keyboardType = KeyboardType.Number,
+            onTextChanged = {
+                divider = it
+                state.divider.value = divider
+            },
+            onClearClick = { divider = "" }
+        )
+        CustomOutlinedTextField(
+            modifier = Modifier.fillMaxWidth(),
+            text = gi,
+            label = R.string.label_gi,
+            placeholder = R.string.placeholder_gi,
+            keyboardType = KeyboardType.Number,
+            onTextChanged = {
+                gi = it
+                state.gi.value = gi
+            },
+            onClearClick = { gi = "" }
+        )
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(color = Color.Green, shape = RoundedCornerShape(MaterialTheme.spacing.small))
+                .clip(RoundedCornerShape(MaterialTheme.spacing.small))
+                .clickable { onResultClicked() },
+        ) {
+            Text(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(all = MaterialTheme.spacing.small),
+                text = stringResource(id = R.string.button_result),
+                fontSize = 16.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color.Black,
+                textAlign =  TextAlign.Center
+            )
+        }
     }
 }
 

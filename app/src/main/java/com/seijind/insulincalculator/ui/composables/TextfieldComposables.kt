@@ -29,6 +29,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -40,7 +41,6 @@ import androidx.compose.ui.unit.sp
 
 internal typealias OnTextChanged = (String) -> Unit
 internal typealias OnClearClicked = () -> Unit
-internal typealias OnDoneActionClicked = () -> Unit
 
 @Composable
 fun CustomOutlinedTextField(
@@ -49,10 +49,11 @@ fun CustomOutlinedTextField(
     label: Int,
     placeholder: Int,
     keyboardType: KeyboardType = KeyboardType.Text,
-    onDoneActionClick: OnDoneActionClicked,
     onClearClick: OnClearClicked,
     onTextChanged: OnTextChanged
 ) {
+    val keyboardController = LocalSoftwareKeyboardController.current
+
     var showClearButton by remember { mutableStateOf(false) }
     OutlinedTextField(
         modifier = modifier
@@ -89,7 +90,9 @@ fun CustomOutlinedTextField(
                 }
             }
         },
-        keyboardActions = KeyboardActions(onDone = { onDoneActionClick() }),
+        keyboardActions = KeyboardActions(onDone = {
+            keyboardController?.hide()
+        }),
         keyboardOptions = KeyboardOptions(
             imeAction = ImeAction.Done,
             keyboardType = keyboardType
@@ -105,7 +108,6 @@ fun <T> AutoCompleteTextView(
     queryLabel: Int,
     onTextChanged: OnTextChanged,
     predictions: List<T>,
-    onDoneActionClick: OnDoneActionClicked,
     onClearClick: OnClearClicked,
     onItemClick: (T) -> Unit = {},
     itemContent: @Composable (T) -> Unit = {}
@@ -123,10 +125,6 @@ fun <T> AutoCompleteTextView(
                 label = queryLabel,
                 placeholder = placeholder,
                 onTextChanged = { onTextChanged(it) },
-                onDoneActionClick = {
-                    view.clearFocus()
-                    onDoneActionClick()
-                },
                 onClearClick = {
                     onClearClick()
                 }
