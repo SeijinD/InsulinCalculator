@@ -118,12 +118,14 @@ private fun HomeContent(
                 )
                 .clip(RoundedCornerShape(MaterialTheme.spacing.small))
                 .clickable {
-                    state.selectedFoods.add(food)
-                    food = Food(
-                        name = mutableStateOf(""),
-                        carbs = mutableDoubleStateOf(0.0),
-                        grams = mutableStateOf("")
-                    )
+                    if (food.name.value.isNotEmpty() && food.grams.value.isNotEmpty()) {
+                        state.selectedFoods.add(food)
+                        food = Food(
+                            name = mutableStateOf(""),
+                            carbs = mutableDoubleStateOf(0.0),
+                            grams = mutableStateOf("")
+                        )
+                    }
                 },
         ) {
             Text(
