@@ -26,12 +26,12 @@ class HomeViewModel @Inject constructor(
                     Food(
                         name = mutableStateOf("Apple"),
                         carbs = mutableDoubleStateOf(0.5),
-                        grams = mutableIntStateOf(200)
+                        grams = mutableStateOf("200")
                     ),
                     Food(
                         name = mutableStateOf("Watermelon"),
                         carbs = mutableDoubleStateOf(0.3),
-                        grams = mutableIntStateOf(300)
+                        grams = mutableStateOf("300")
                     )
                 ),
                 divider = mutableIntStateOf(10),

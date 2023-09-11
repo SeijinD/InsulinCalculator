@@ -2,11 +2,18 @@
     <string name="app_name">Insulin Calculator</string>
 
     <!-- Placeholders -->
-    <string name="placeholder_divider" translatable="false">8/10/12...</string>
     <string name="placeholder_food_grams">50gr</string>
+    <string name="placeholder_divider" translatable="false">8/10/12...</string>
     <string name="placeholder_gi" translatable="false">160 mg/dL</string>
 
     <!-- Labels -->
+    <string name="label_foods">Foods</string>
+    <string name="label_food_grams">Grams</string>
+    <string name="label_divider">Divider</string>
+    <string name="label_gi">GI</string>
 
+    <!-- Buttons -->
+    <string name="button_add">Add</string>
+    <string name="button_result">Result</string>
 
 </resources>

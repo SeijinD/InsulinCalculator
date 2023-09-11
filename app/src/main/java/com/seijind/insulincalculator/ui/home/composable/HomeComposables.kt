@@ -1,17 +1,37 @@
 package com.seijind.insulincalculator.ui.home.composable
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.sp
+import com.seijind.insulincalculator.R
+import com.seijind.insulincalculator.ui.composables.CustomOutlinedTextField
+import com.seijind.insulincalculator.ui.home.model.Food
 import com.seijind.insulincalculator.ui.home.model.HomeUiState
 import com.seijind.insulincalculator.ui.theme.InsulinCalculatorTheme
 import com.seijind.insulincalculator.ui.theme.spacing
@@ -42,9 +62,87 @@ private fun HomeContent(
             .verticalScroll(rememberScrollState())
             .padding(all = MaterialTheme.spacing.medium),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.medium)
+        verticalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.small)
     ) {
+        val view = LocalView.current
+        val food by remember { mutableStateOf(Food()) }
+        var divider by remember { mutableIntStateOf(state.divider.intValue) }
+        var gi by remember { mutableIntStateOf(state.gi.intValue) }
+
         Text(text = "Home")
+        Text(
+            modifier = Modifier.fillMaxWidth(),
+            text = stringResource(id = R.string.label_foods),
+            fontSize = 16.sp,
+            fontWeight = FontWeight.Bold,
+            color = Color.Black
+        )
+        CustomOutlinedTextField(
+            modifier = Modifier.fillMaxWidth(),
+            text = food.grams.value,
+            label = R.string.label_food_grams,
+            placeholder = R.string.placeholder_food_grams,
+            keyboardType = KeyboardType.Number,
+            onTextChanged = { food.grams.value  = it },
+            onClearClick = { food.grams.value = "" },
+            onDoneActionClick = { view.clearFocus() }
+        )
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(color = Color.Green, shape = RoundedCornerShape(MaterialTheme.spacing.small))
+                .clip(RoundedCornerShape(MaterialTheme.spacing.small))
+                .clickable {  },
+        ) {
+            Text(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(all = MaterialTheme.spacing.small),
+                text = stringResource(id = R.string.button_add),
+                fontSize = 16.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color.Black,
+                textAlign = TextAlign.Center
+            )
+        }
+//        CustomTextfield(
+//            modifier = Modifier.fillMaxWidth(),
+//            text = divider.toString(),
+//            label = R.string.label_divider,
+//            placeholder = R.string.placeholder_divider,
+//            onAddClicked = {
+//                divider = it.toInt()
+//                state.divider.intValue = divider
+//            },
+//            onClearClick = { divider = 0 }
+//        )
+//        CustomTextfield(
+//            modifier = Modifier.fillMaxWidth(),
+//            text = gi.toString(),
+//            label = R.string.label_gi,
+//            placeholder = R.string.placeholder_gi,
+//            onAddClicked = { state.gi.intValue = it.toInt() },
+//            onClearClick = { gi = 0 }
+//        )
+//        Column(
+//            modifier = Modifier
+//                .fillMaxWidth()
+//                .padding(horizontal = MaterialTheme.spacing.medium)
+//                .background(color = Color.Green, shape = RoundedCornerShape(MaterialTheme.spacing.small))
+//                .clip(RoundedCornerShape(MaterialTheme.spacing.small))
+//                .clickable { onResultClicked() },
+//        ) {
+//            Text(
+//                modifier = Modifier
+//                    .fillMaxWidth()
+//                    .padding(all = MaterialTheme.spacing.medium),
+//                text = stringResource(id = R.string.button_result),
+//                fontSize = 16.sp,
+//                fontWeight = FontWeight.Bold,
+//                color = Color.Black,
+//                textAlign =  TextAlign.Center
+//            )
+//        }
     }
 }
 

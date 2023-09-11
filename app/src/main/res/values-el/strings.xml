@@ -6,6 +6,13 @@
     <string name="placeholder_food_grams">50γρ</string>
 
     <!-- Labels -->
+    <string name="label_foods">Foods</string>
+    <string name="label_food_grams">Grams</string>
+    <string name="label_divider">Divider</string>
+    <string name="label_gi">GI</string>
 
+    <!-- Buttons -->
+    <string name="button_add">Add</string>
+    <string name="button_result">Result</string>
 
 </resources>
