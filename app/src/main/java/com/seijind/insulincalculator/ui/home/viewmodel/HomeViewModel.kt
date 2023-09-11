@@ -26,27 +26,28 @@ class HomeViewModel @Inject constructor(
                     Food(
                         name = mutableStateOf("Apple"),
                         carbs = mutableDoubleStateOf(0.5),
-                        grams = mutableStateOf("200")
+                        grams = mutableStateOf("")
                     ),
                     Food(
                         name = mutableStateOf("Watermelon"),
                         carbs = mutableDoubleStateOf(0.3),
-                        grams = mutableStateOf("300")
+                        grams = mutableStateOf("")
                     )
                 ),
-                divider = mutableStateOf("10"),
-                totalCarbs = mutableDoubleStateOf(50.0),
-                gi = mutableStateOf("160"),
+                selectedFoods = mutableListOf(),
+                totalCarbs = mutableDoubleStateOf(0.0),
+                divider = mutableStateOf(""),
+                gi = mutableStateOf(""),
                 result = mutableStateOf("")
             )
         }
     }
 
     fun onResultClicked() {
-        for (food in uiState.value?.selectedFoods!!) {
-            uiState.value?.totalCarbs?.doubleValue?.plus(food.carbs.doubleValue)
+        var totalCarbs = uiState.value?.totalCarbs?.doubleValue ?: 0.0
+        uiState.value?.selectedFoods?.forEach { food ->
+            totalCarbs += food.carbs.doubleValue * food.grams.value.toInt()
         }
-        val totalCarbs = uiState.value?.totalCarbs?.doubleValue ?: 0.0
         val gi = uiState.value?.gi?.value?.toInt() ?: 0
         val divider = uiState.value?.divider?.value?.toInt() ?: 0
 

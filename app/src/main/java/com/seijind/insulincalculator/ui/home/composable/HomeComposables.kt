@@ -156,12 +156,7 @@ private fun HomeContent(
                         fontWeight = FontWeight.Bold
                     )
                     Text(
-                        text = food.carbs.doubleValue.toString(),
-                        fontSize = 16.sp,
-                        fontWeight = FontWeight.Bold
-                    )
-                    Text(
-                        text = food.grams.value,
+                        text = "${food.grams.value}gr",
                         fontSize = 16.sp,
                         fontWeight = FontWeight.Bold
                     )
@@ -235,6 +230,14 @@ private fun HomeContent(
                 textAlign =  TextAlign.Center
             )
         }
+        Text(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(MaterialTheme.spacing.medium),
+            text = "Result: ${state.result.value} units",
+            fontSize = 16.sp,
+            fontWeight = FontWeight.Bold
+        )
     }
 }
 
