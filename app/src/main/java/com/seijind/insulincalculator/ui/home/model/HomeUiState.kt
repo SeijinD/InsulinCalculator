@@ -8,7 +8,8 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 
 data class HomeUiState(
-    val foods: MutableList<Food> = mutableListOf(),
+    val foods: List<Food> = emptyList(),
+    val selectedFoods: MutableList<Food> = mutableListOf(),
     val divider: MutableState<String> = mutableStateOf(""),
     val gi: MutableState<String> = mutableStateOf(""),
     val totalCarbs: MutableDoubleState = mutableDoubleStateOf(0.0),

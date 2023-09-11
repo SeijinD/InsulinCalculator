@@ -22,7 +22,7 @@ class HomeViewModel @Inject constructor(
     fun init() {
         launch {
             uiState.value = HomeUiState(
-                foods = mutableListOf(
+                foods = listOf(
                     Food(
                         name = mutableStateOf("Apple"),
                         carbs = mutableDoubleStateOf(0.5),
@@ -43,7 +43,7 @@ class HomeViewModel @Inject constructor(
     }
 
     fun onResultClicked() {
-        for (food in uiState.value?.foods!!) {
+        for (food in uiState.value?.selectedFoods!!) {
             uiState.value?.totalCarbs?.doubleValue?.plus(food.carbs.doubleValue)
         }
         val totalCarbs = uiState.value?.totalCarbs?.doubleValue ?: 0.0
