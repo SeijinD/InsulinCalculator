@@ -33,12 +33,7 @@ class HomeViewModel @Inject constructor(
                         carbs = mutableDoubleStateOf(0.3),
                         grams = mutableStateOf("")
                     )
-                ),
-                selectedFoods = mutableListOf(),
-                totalCarbs = mutableDoubleStateOf(0.0),
-                divider = mutableStateOf(""),
-                gi = mutableStateOf(""),
-                result = mutableStateOf("")
+                )
             )
         }
     }
@@ -52,11 +47,11 @@ class HomeViewModel @Inject constructor(
         val divider = uiState.value?.divider?.value?.toInt() ?: 0
 
         val result: Double = when (gi) {
-            in 0..70 -> customRound(totalCarbs / divider)
-            in 71..180 -> customRound(totalCarbs / divider) + 0.5
-            in 181..240 -> customRound(totalCarbs / divider) + 1
-            in 241..300 -> customRound(totalCarbs / divider) + 1.5
-            in 301..360 -> customRound(totalCarbs / divider) + 2
+            in 0..69 -> customRound(totalCarbs / divider)
+            in 70..179 -> customRound(totalCarbs / divider)
+            in 180..239 -> customRound(totalCarbs / divider) + 0.5
+            in 240..299 -> customRound(totalCarbs / divider) + 1.0
+            in 300..360 -> customRound(totalCarbs / divider) + 1.5
             else -> 0.0
         }
         uiState.value = uiState.value?.copy(result = mutableStateOf(result.toString()))
