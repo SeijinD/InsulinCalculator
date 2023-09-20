@@ -30,7 +30,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import com.seijind.insulincalculator.R
-import com.seijind.insulincalculator.ui.composables.AutoCompleteTextView
+import com.seijind.insulincalculator.ui.composables.AutoComplete
 import com.seijind.insulincalculator.ui.composables.CustomOutlinedTextField
 import com.seijind.insulincalculator.ui.home.model.Food
 import com.seijind.insulincalculator.ui.home.model.HomeUiState
@@ -70,27 +70,15 @@ private fun HomeContent(
         var gi by remember { mutableStateOf(state.gi.value) }
 
         Text(text = "Home")
-        AutoCompleteTextView(
-            modifier = Modifier.fillMaxWidth(),
-            query = food.name.value,
-            placeholder = R.string.placeholder_food,
-            queryLabel = R.string.label_foods,
-            onTextChanged = {
-                food.name.value = it
-            },
-            predictions = state.foods,
-            onClearClick = { food.name.value = "" },
+        AutoComplete(
+            food = food,
+            foods = state.foods,
+            onTextChanged = { food.name.value = it },
             onItemClick = {
                 food.name.value = it.name.value
                 food.carbs.doubleValue = it.carbs.doubleValue
-            },
-        ) {
-            Text(
-                text = it.name.value,
-                fontSize = 16.sp,
-                fontWeight = FontWeight.Bold
-            )
-        }
+            }
+        )
         CustomOutlinedTextField(
             modifier = Modifier.fillMaxWidth(),
             text = food.grams.value,
