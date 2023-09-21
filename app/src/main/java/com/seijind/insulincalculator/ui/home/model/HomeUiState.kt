@@ -13,7 +13,7 @@ data class HomeUiState(
     val divider: MutableState<String> = mutableStateOf(""),
     val gi: MutableState<String> = mutableStateOf(""),
     val totalCarbs: MutableDoubleState = mutableDoubleStateOf(0.0),
-    val result: MutableState<String> = mutableStateOf("")
+    val result: MutableState<String> = mutableStateOf("0.0"),
 )
 
 data class Food(
