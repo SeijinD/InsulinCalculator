@@ -114,7 +114,6 @@ fun CustomOutlinedTextField(
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AutoComplete(
     food: Food,
@@ -204,22 +203,30 @@ fun AutoComplete(
                                     .contains("others")
                             }
                                 .sortedBy { it.name.value }
-                        ) {
-                            FoodItem(title = it.name.value) { title ->
-                                food.name.value = title
-                                onItemClick(food)
-                                expanded = false
-                            }
+                        ) { newFood ->
+                            FoodItem(
+                                title = newFood.name.value,
+                                onSelect = {
+                                    food.name.value = newFood.name.value
+                                    food.carbs.doubleValue = newFood.carbs.doubleValue
+                                    onItemClick(food)
+                                    expanded = false
+                                }
+                            )
                         }
                     } else {
                         items(
                             foods.sortedBy { it.name.value }
-                        ) {
-                            FoodItem(title = it.name.value) { title ->
-                                food.name.value = title
-                                onItemClick(food)
-                                expanded = false
-                            }
+                        ) { newFood ->
+                            FoodItem(
+                                title = newFood.name.value,
+                                onSelect = {
+                                    food.name.value = newFood.name.value
+                                    food.carbs.doubleValue = newFood.carbs.doubleValue
+                                    onItemClick(food)
+                                    expanded = false
+                                }
+                            )
                         }
                     }
                 }
