@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Insulin Calculator</string>
+    <string name="app_name">Υπολογισμός Ινσουλίνης</string>
 
     <!-- Placeholders -->
     <string name="placeholder_food">Αυγό</string>

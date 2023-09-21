@@ -69,7 +69,13 @@ private fun HomeContent(
         var divider by remember { mutableStateOf(state.divider.value) }
         var gi by remember { mutableStateOf(state.gi.value) }
 
-        Text(text = "Home")
+        Text(
+            text = stringResource(id = R.string.app_name),
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            color = Color.Black,
+            maxLines = 1
+        )
         AutoComplete(
             food = food,
             foods = state.foods,
