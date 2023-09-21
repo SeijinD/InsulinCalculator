@@ -14,8 +14,11 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableDoubleStateOf
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -36,6 +39,7 @@ import com.seijind.insulincalculator.ui.home.model.Food
 import com.seijind.insulincalculator.ui.home.model.HomeUiState
 import com.seijind.insulincalculator.ui.theme.InsulinCalculatorTheme
 import com.seijind.insulincalculator.ui.theme.spacing
+import kotlinx.coroutines.delay
 
 private typealias OnResultClicked = () -> Unit
 
@@ -137,24 +141,10 @@ private fun HomeContent(
             modifier = Modifier.fillMaxWidth()
         ) {
             state.selectedFoods.forEach { food ->
-                Row(
-                    modifier = Modifier
-                        .padding(MaterialTheme.spacing.small)
-                        .fillMaxWidth(),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    Text(
-                        text = food.name.value,
-                        fontSize = 16.sp,
-                        fontWeight = FontWeight.Bold
-                    )
-                    Text(
-                        text = stringResource(id = R.string.grams, food.grams.value),
-                        fontSize = 16.sp,
-                        fontWeight = FontWeight.Bold
-                    )
-                }
+                RemovableRow(
+                    food = food,
+                    removeFood = { state.selectedFoods.remove(it) }
+                )
             }
         }
         CustomOutlinedTextField(
@@ -229,6 +219,54 @@ private fun HomeContent(
                 .fillMaxWidth()
                 .padding(MaterialTheme.spacing.medium),
             text = stringResource(id = R.string.result_text, state.result.value),
+            fontSize = 16.sp,
+            fontWeight = FontWeight.Bold
+        )
+    }
+}
+
+@Composable
+fun RemovableRow(
+    food: Food,
+    removeFood: (Food) -> Unit
+) {
+    var clickCount by remember { mutableIntStateOf(0) }
+    var lastClickTime by remember { mutableLongStateOf(0L) }
+
+    LaunchedEffect(clickCount) {
+        if (clickCount > 0) {
+            delay(1000)
+            clickCount = 0
+        }
+    }
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(MaterialTheme.spacing.small)
+            .clickable {
+                val currentTime = System.currentTimeMillis()
+                if (currentTime - lastClickTime < 500) {
+                    clickCount++
+                    if (clickCount == 2) {
+                        removeFood(food)
+                        clickCount = 0
+                    }
+                } else {
+                    clickCount = 1
+                }
+                lastClickTime = currentTime
+            },
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        Text(
+            text = food.name.value,
+            fontSize = 16.sp,
+            fontWeight = FontWeight.Bold
+        )
+
+        Text(
+            text = stringResource(id = R.string.grams, food.grams.value),
             fontSize = 16.sp,
             fontWeight = FontWeight.Bold
         )
