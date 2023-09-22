@@ -42,6 +42,7 @@ import com.seijind.insulincalculator.ui.theme.spacing
 import kotlinx.coroutines.delay
 
 private typealias OnResultClicked = () -> Unit
+private typealias RemoveFood = (Food) -> Unit
 
 @Composable
 internal fun HomeScreen(
@@ -228,7 +229,7 @@ private fun HomeContent(
 @Composable
 fun RemovableRow(
     food: Food,
-    removeFood: (Food) -> Unit
+    removeFood: RemoveFood
 ) {
     var clickCount by remember { mutableIntStateOf(0) }
     var lastClickTime by remember { mutableLongStateOf(0L) }
