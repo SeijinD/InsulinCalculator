@@ -6,36 +6,36 @@ import androidx.compose.runtime.mutableStateOf
 object Foods {
     val foods = listOf(
         Food(
-            name = mutableStateOf("Apple"),
-            carbs = mutableDoubleStateOf(0.5)
+            name = mutableStateOf("Μακαρονια Ολικης Misko"),
+            carbs = mutableDoubleStateOf(0.64)
         ),
         Food(
-            name = mutableStateOf("Watermelon"),
-            carbs = mutableDoubleStateOf(0.3)
+            name = mutableStateOf("Πατατες Φουρνου"),
+            carbs = mutableDoubleStateOf(0.215)
         ),
         Food(
-            name = mutableStateOf("Egg"),
-            carbs = mutableDoubleStateOf(0.5)
+            name = mutableStateOf("Πατατες Τηγανιτες"),
+            carbs = mutableDoubleStateOf(0.375)
         ),
         Food(
-            name = mutableStateOf("Watermelon Big"),
-            carbs = mutableDoubleStateOf(0.3)
+            name = mutableStateOf("Ψωμι Λευκο"),
+            carbs = mutableDoubleStateOf(0.47)
         ),
         Food(
-            name = mutableStateOf("Apple 2"),
-            carbs = mutableDoubleStateOf(0.5)
+            name = mutableStateOf("Ψωμι Ολικης"),
+            carbs = mutableDoubleStateOf(0.44)
         ),
         Food(
-            name = mutableStateOf("Watermelon Small"),
-            carbs = mutableDoubleStateOf(0.3)
+            name = mutableStateOf("Ψωμι Πολυσπορο"),
+            carbs = mutableDoubleStateOf(0.44)
         ),
         Food(
-            name = mutableStateOf("Potatoes"),
-            carbs = mutableDoubleStateOf(0.5)
+            name = mutableStateOf("Γαλα"),
+            carbs = mutableDoubleStateOf(0.06)
         ),
         Food(
-            name = mutableStateOf("Potatoes with Cheese"),
-            carbs = mutableDoubleStateOf(0.3)
-        )
+            name = mutableStateOf(""),
+            carbs = mutableDoubleStateOf(0.0)
+        ),
     )
 }
