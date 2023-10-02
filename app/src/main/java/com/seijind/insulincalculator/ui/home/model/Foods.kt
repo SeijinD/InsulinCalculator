@@ -34,8 +34,8 @@ object Foods {
             carbs = mutableDoubleStateOf(0.06)
         ),
         Food(
-            name = mutableStateOf(""),
-            carbs = mutableDoubleStateOf(0.0)
+            name = mutableStateOf("Γιαουρτι 0%"),
+            carbs = mutableDoubleStateOf(0.03)
         ),
     )
 }
